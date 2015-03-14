@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
-<head xmlns="http://www.w3.org/1999/xhtml" xml:lang="he" dir="rtl">
+<head xmlns="http://www.w3.org/1999/xhtml" xml:lang="he" lang="he" dir="rtl">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="אתר אינטרנט של @ViewBag.StoreName">
+    <meta name="keywords" content="@ViewBag.Keywords">
     <title>@ViewBag.Title - @ViewBag.StoreName</title>
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/css/bootstrap-rtl.css" rel="stylesheet" />
-    <link href="~/Content/css/Site.css" rel="stylesheet" />
-    <link href="~/Content/css/bootstrap.customize.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/css")
 
     <!-- HTML5 Shim IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -19,55 +19,67 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink((string)ViewBag.StoreName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink((string)ViewBag.StoreName, "Index", "Pages", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <nav class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("ראשי", "Index", "Home")</li>
-                    <li>@Html.ActionLink("מי אנחנו", "About", "Home")</li>
-                    <li>@Html.ActionLink("צרו קשר", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("ראשי", "Index", "Pages")</li>
+                    <li>@Html.ActionLink("קטלוג", "Catalog", "Pages")</li>
+                    <li>@Html.ActionLink("מי אנחנו", "About", "Pages")</li>
+                    <li>@Html.ActionLink("צרו קשר", "Contact", "Pages")</li>
                 </ul>
+                <a href="mailto:@ViewBag.EmailAddress" class="header-icon-container">
+                    <span id="email-icon" data-placement="bottom"
+                          class="icon glyphicon glyphicon-envelope" aria-hidden="true" />
+                </a>
                 <span class="header-icon-container">
-                    <span class="icon glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                    04-8888888
+                    <span id="phone">@ViewBag.Phone</span>
+                    <span id="phone-icon" data-placement="bottom"
+                          class="icon glyphicon glyphicon-earphone" aria-hidden="true" />
                 </span>
-            </div>
-
+            </nav>
         </div>
     </div>
    
     <div class="container body-content">
         @RenderBody()
     </div>
-    <div class="footer">
-        Programming by <a href="https://il.linkedin.com/in/myarichuk">Michael Yarichuk</a>, 2015 <br/>
+    <footer>
+        Programming by <a href="https://il.linkedin.com/in/myarichuk">Michael Yarichuk</a>, 2015 <br />
         <p>Background photo credit: &copy; <a href="http://mike.openphoto.net/gallery/">Michael Jastremski</a> for <a href="http://openphoto.net/gallery/image/view/19780">openphoto.net</a>, distributed with license <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-ShareAlike 3.0 Unported</a></p>
-    </div>
+        @RenderSection("footer", required: false)
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    width:100vw;
-    height:100vh;
-    max-width:100vw;
-    min-height:100vmax;
-
     <script type="text/javascript">
+        var popoverTemplate = ['<div class="popover">',
+                                        '<div class="arrow"></div>',
+                                        '<div class="popover-content">',
+                                        '</div>',
+                                    '</div>'].join('');
+
+        var emailContent = 'לכל שאלה או פנייה, ניתן ליצור קשר בדו"אל <a href="@ViewBag.EmailAddress">@ViewBag.EmailAddress</a>';
+
         $(document).ready(function () {
-            //var bodyContent = $('.body-content');
-            //bodyContent.css('width', '100vw');
-            //bodyContent.css('height', '100vh');
-            //bodyContent.css('max-width', '100vw');
-            //bodyContent.css('min-height', '100vmax');
-        });
+            $('body').popover({
+                selector: '#email-icon',
+                trigger: 'hover',
+                content: emailContent,
+                template: popoverTemplate,
+                placement: "bottom",
+                html: true
+            });
+
+        })
     </script>
 </body>
 </html>

@@ -23,11 +23,10 @@ namespace WeddingDressesWebsite
 					  "~/Scripts/bootstrap.js",
 					  "~/Scripts/respond.js"));
 
-			bundles.Add(new StyleBundle("~/Content/css").Include(
+			bundles.Add(new StyleBundle("~/bundles/css").Include(
 					  "~/Content/css/bootstrap-rtl.css",
 					  "~/Content/css/Site.css",
-					  "~/Content/css/bootstrap.customize.css",
-					  "~/Content/css/kube.min.css"));
+					  "~/Content/css/bootstrap.customize.css"));
         }
 	}
 }

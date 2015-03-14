@@ -15,10 +15,13 @@ namespace WeddingDressesWebsite.Controllers
 		[Route("data/main-page-images")]
 		public IEnumerable<string> GetImagesForMainPage()
 		{
-			const string urlPrefix = "/Content/Images/Main/";
-            var fileUrls = Directory.EnumerateFiles(HostingEnvironment.MapPath("~/Content/Images/Main"))
-								    .Where(path => path.EndsWith(".jpg",StringComparison.InvariantCultureIgnoreCase))
-								    .Select(path => urlPrefix + new FileInfo(path).Name);
+			const string urlPrefix = "/content/images/main/";
+			const string imageExtension = ".jpg";
+            const string mainPageImagesPath = "~/Content/Images/Main";
+
+			var fileUrls = Directory.EnumerateFiles(HostingEnvironment.MapPath(mainPageImagesPath))
+								    .Where(path => path.EndsWith(imageExtension, StringComparison.InvariantCultureIgnoreCase))
+								    .Select(path => Uri.EscapeUriString(urlPrefix + new FileInfo(path).Name));
 			
             return fileUrls;
 		}

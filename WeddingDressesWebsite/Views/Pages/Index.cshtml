@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "ראשי";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.getJSON('/data/main-page-images', populateCarousel);
+            $('.btn-to-catalog').click(function(){
+                document.location.href = '/Pages/Catalog';
+            });
+        })
+
+        function populateCarousel(data) {
+            var imageUrls = data;
+            var imagesParent = $('.carousel-inner');
+            var indicatorsParent = $('.carousel-indicators');
+            var isActiveSet = false;
+            $.each(imageUrls, function (i, url) {
+                if (isActiveSet == false) {
+                    imagesParent.append('<div class="item active"> <img src="' + url + '"/> </div>');
+                    indicatorsParent.append('<li data-target="#main-page-carousel" data-slide-to="' + i + '" class="active"></li>');
+                    isActiveSet = true;
+                }
+                else {
+                    imagesParent.append('<div class="item"> <img src="' + url + '"/> </div>');
+                    indicatorsParent.append('<li data-target="#main-page-carousel" data-slide-to="' + i + '"></li>');
+                }
+            });
+
+            var configuredInterval = @ViewBag.MainPageImageChangeInterval;
+            $('#main-page-carousel').carousel({
+                interval: configuredInterval
+            });
+        }
+    </script>
+}
+
+<div class="main-headline">
+    <h1>שמלות כלה</h1>
+    <h2>כי מגיע לך את הטוב ביותר</h2>
+    <p>אנחנו מוכרים שמלות מאוד יפות</p>
+    <p class="border-top">שמלות | תיקים | אביזרים</p>
+    @Html.ActionLink("לקטלוג השמלות","Catalog","Pages",new { @class = "btn-lg btn-to-catalog" })
+</div>
+
+<div id="main-page-carousel" class="carousel slide carousel-wrapper" data-interval="@ViewBag.MainPageImageChangeInterval">    
+    <ol class="carousel-indicators"></ol>   
+    <div class="carousel-inner">
+    </div>
+
+    <a class="left carousel-control" href="#main-page-carousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+
+    <a class="right carousel-control" href="#main-page-carousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+@section footer{
+   <p>Credit for photo with padlocks: &copy; <a href="http://miro.openphoto.net/gallery/">Miroslav Vajdić</a> for <a href="http://openphoto.net/gallery/image/view/26171">openphoto.net</a> , distributed with license <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-ShareAlike 3.0 Unported</a></p>
+   <p>Credit for ring in flowers wedding photo: &copy; <a href="http://hf.openphoto.net/gallery/">Heather </a> for <a href="http://openphoto.net/gallery/image/view/27433">openphoto.net</a>, distributed with license <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-ShareAlike 3.0 Unported</a></p>
+   <p>Credit for wedding car just wed - shoe polish photo: &copy; <a href="http://mike.openphoto.net/gallery/">Michael Jastremski</a> for <a href="http://openphoto.net/gallery/image/view/26987">openphoto.net</a>, distributed with license <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-ShareAlike 3.0 Unported</a></p>
+}

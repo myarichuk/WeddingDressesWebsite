@@ -3,5 +3,53 @@
 	padding:20px;
 	color:wheat;
 	background-color:rgba(25,25,25,0.5) !important;
+}
 
+.btn-to-catalog { 
+  cursor:pointer;
+  text-align:center;
+  color: #ffffff; 
+  background-color: rgba(39, 42, 48, 0.8); 
+  border-color: #878787; 
+  border-radius : 10px;
+} 
+
+.btn-to-catalog:hover, 
+.btn-to-catalog:focus, 
+.btn-to-catalog:active, 
+.btn-to-catalog.active, 
+.open .dropdown-toggle.btn-to-catalog { 
+  color: #ffffff; 
+  background-color: #525054; 
+  border-color: #878787; 
+} 
+ 
+.btn-to-catalog:active, 
+.btn-to-catalog.active, 
+.open .dropdown-toggle.btn-to-catalog { 
+  background-image: none; 
+} 
+ 
+.btn-to-catalog.disabled, 
+.btn-to-catalog[disabled], 
+fieldset[disabled] .btn-to-catalog, 
+.btn-to-catalog.disabled:hover, 
+.btn-to-catalog[disabled]:hover, 
+fieldset[disabled] .btn-to-catalog:hover, 
+.btn-to-catalog.disabled:focus, 
+.btn-to-catalog[disabled]:focus, 
+fieldset[disabled] .btn-to-catalog:focus, 
+.btn-to-catalog.disabled:active, 
+.btn-to-catalog[disabled]:active, 
+fieldset[disabled] .btn-to-catalog:active, 
+.btn-to-catalog.disabled.active, 
+.btn-to-catalog[disabled].active, 
+fieldset[disabled] .btn-to-catalog.active { 
+  background-color: #828282; 
+  border-color: #878787; 
+} 
+ 
+.btn-to-catalog .badge { 
+  color: #828282; 
+  background-color: #ffffff; 
 }
