@@ -137,6 +137,12 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\background1920x1280.jpg" />
+    <Content Include="Content\Images\Catalog\20111125_132405.jpg" />
+    <Content Include="Content\Images\Catalog\20111125_132410.jpg" />
+    <Content Include="Content\Images\Catalog\20111125_132415.jpg" />
+    <Content Include="Content\Images\Catalog\20111125_132432.jpg" />
+    <Content Include="Content\Images\Catalog\JustAFolder\20111223_144113.jpg" />
+    <Content Include="Content\Images\Catalog\JustAFolder\20111223_144126.jpg" />
     <Content Include="Content\Images\Main\image1.jpg" />
     <Content Include="Content\Images\Main\image2.jpg" />
     <Content Include="Content\Images\Main\image3.jpg" />
@@ -208,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Catalog\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

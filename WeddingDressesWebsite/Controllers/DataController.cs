@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Web;
+using System.Text.RegularExpressions;
 using System.Web.Hosting;
 using System.Web.Http;
 
 namespace WeddingDressesWebsite.Controllers
-{	
+{
 	public class DataController : ApiController
 	{
 		private const string imageExtension = ".jpg";
@@ -22,7 +20,7 @@ namespace WeddingDressesWebsite.Controllers
 			const string urlPrefix = "/content/images/main/";
             const string mainPageImagesPath = "~/Content/Images/Main";
 
-			var fileUrls = Directory.EnumerateFiles(HostingEnvironment.MapPath(mainPageImagesPath))
+			var fileUrls = Directory.EnumerateFiles(HostingEnvironment.MapPath(mainPageImagesPath),"*",SearchOption.AllDirectories)
 								    .Where(path => path.EndsWith(imageExtension, StringComparison.InvariantCultureIgnoreCase))
 								    .Select(path => Uri.EscapeUriString(urlPrefix + new FileInfo(path).Name));
 			
@@ -35,20 +33,56 @@ namespace WeddingDressesWebsite.Controllers
 			const string urlPrefix = "/content/images/catalog/";
 			const string mainPageImagesPath = "~/Content/Images/Catalog";
 
-			var fileInfos = Directory.EnumerateFiles(HostingEnvironment.MapPath(mainPageImagesPath))
+			var fileInfos = Directory.EnumerateFiles(HostingEnvironment.MapPath(mainPageImagesPath), "*", SearchOption.AllDirectories)
 									.Where(path => path.EndsWith(imageExtension, StringComparison.InvariantCultureIgnoreCase))
-									.Select(path => new FileInfo(path));
+									.Select(path => new FileInfo(path))
+									.ToList();
 
-			return from fileInfo in fileInfos
-					let bitmap = new Bitmap(fileInfo.FullName)
-					select new 
-					{
-						Url = Uri.EscapeUriString(urlPrefix + fileInfo.Name),
-						Width = bitmap.Width,
-						Height = bitmap.Height,
-						Title = bitmap.PropertyItems.Any(p => p.Id == 0x0320) ? 
-									Encoding.UTF8.GetString(bitmap.PropertyItems.First(p => p.Id == 0x0320).Value) : null
-					};
+			List<ImageData> imageData = null;
+            try
+			{
+				imageData = (from fileInfo in fileInfos
+								let bitmap = new Bitmap(fileInfo.FullName)
+								let pathCutoffIndex = fileInfo.FullName.IndexOf("\\Content\\", StringComparison.InvariantCultureIgnoreCase)
+								let imagePath = fileInfo.FullName.Substring(pathCutoffIndex)
+								select new ImageData
+								{
+									Url = Uri.EscapeUriString(imagePath.Replace("\\","/")),
+									Width = bitmap.Width,
+									Height = bitmap.Height,
+									Title = bitmap.PropertyItems.Any(p => p.Id == 270) ?
+												Encoding.UTF8.GetString(bitmap.PropertyItems.First(p => p.Id == 270).Value).Replace("\u0000", String.Empty) : null,
+									@Bitmap = bitmap
+								}).ToList();
+
+				return imageData.Select(item => new
+				{
+					item.Url,item.Width,item.Height,item.Title
+				});
+			}
+			finally
+			{
+				imageData.ForEach(item => item.Dispose());
+            }
+		}
+
+		private class ImageData : IDisposable
+		{
+			public string Url { get; set; }
+
+			public int Width { get; set; }
+
+			public int Height { get; set; }
+
+			public string Title { get; set; }
+
+			public Bitmap @Bitmap { get; set; }
+
+			public void Dispose()
+			{
+				if(Bitmap != null)
+				Bitmap.Dispose();
+			}
 		}
 	}
 }
