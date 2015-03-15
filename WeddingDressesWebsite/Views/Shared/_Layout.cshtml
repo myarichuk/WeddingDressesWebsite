@@ -6,8 +6,11 @@
     <meta name="description" content="אתר אינטרנט של @ViewBag.StoreName">
     <meta name="keywords" content="@ViewBag.Keywords">
     <title>@ViewBag.Title - @ViewBag.StoreName</title>
+    @RenderSection("header", required: false)
+
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bundles/css")
+    
 
     <!-- HTML5 Shim IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

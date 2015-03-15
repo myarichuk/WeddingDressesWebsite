@@ -2,4 +2,20 @@
     ViewBag.Title = "קטלוג";
 }
 
+@section header{
+    @Scripts.Render("~/bundles/gallery/scripts")
+    @Styles.Render("~/bundles/gallery/css")
+    <noscript>@Styles.Render("~/bundles/gallery/css-no-javascript")</noscript>
+    <!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
+}
 
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+        })
+    </script>
+}
+
+<div class="gamma-container gamma-loading" id="gamma-container">
+    <ul class="gamma-gallery"></ul>
+</div>

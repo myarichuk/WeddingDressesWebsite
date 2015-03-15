@@ -19,6 +19,14 @@ namespace WeddingDressesWebsite
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 						"~/Scripts/modernizr-*"));
 
+			bundles.Add(new ScriptBundle("~/bundles/gallery/scripts").Include(
+			"~/Scripts/modernizr.custom.70736.js",
+			"~/Scripts/jquery.masonry.min.js",
+			"~/Scripts/jquery.history.js",
+			"~/Scripts/js-url.min.js",
+			"~/Scripts/jquerypp.custom.js",
+			"~/Scripts/gamma.js"));
+
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
 					  "~/Scripts/bootstrap.js",
 					  "~/Scripts/respond.js"));
@@ -27,6 +35,11 @@ namespace WeddingDressesWebsite
 					  "~/Content/css/bootstrap-rtl.css",
 					  "~/Content/css/Site.css",
 					  "~/Content/css/bootstrap.customize.css"));
+
+			bundles.Add(new StyleBundle("~/bundles/gallery/css").Include(
+					  "~/Content/css/style.css"));
+
+			bundles.Add(new StyleBundle("~/bundles/gallery/css-no-javascript").Include("~/Content/css/noJS.css"));
         }
 	}
 }
