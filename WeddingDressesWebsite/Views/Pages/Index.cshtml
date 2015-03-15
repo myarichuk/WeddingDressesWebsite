@@ -9,6 +9,14 @@
             $('.btn-to-catalog').click(function(){
                 document.location.href = '/Pages/Catalog';
             });
+            
+            $(".carousel-control").hide("hide");
+            $("#main-page-carousel").mouseenter(function(){
+                $(".carousel-control").show("slow");
+            });
+            $("#main-page-carousel").mouseleave(function(){
+                $(".carousel-control").hide("hide");
+            });
         })
 
         function populateCarousel(data) {
