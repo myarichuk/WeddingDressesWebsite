@@ -52,9 +52,10 @@
    
     <div class="container body-content">
         @RenderBody()
+        @RenderSection("body", required: false)
     </div>
     <footer>
-        Programming by <a href="https://il.linkedin.com/in/myarichuk">Michael Yarichuk</a>, 2015 <br />
+        <p>Programming by <a href="https://il.linkedin.com/in/myarichuk">Michael Yarichuk</a>, 2015 </p>
         <p>Background photo credit: &copy; <a href="http://mike.openphoto.net/gallery/">Michael Jastremski</a> for <a href="http://openphoto.net/gallery/image/view/19780">openphoto.net</a>, distributed with license <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-ShareAlike 3.0 Unported</a></p>
         @RenderSection("footer", required: false)
     </footer>

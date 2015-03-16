@@ -10,8 +10,8 @@
     @Scripts.Render("~/bundles/gallery/scripts")
 
     <script type="text/javascript">
-        $(document).ready(function () {           
-            $.getJSON('/data/catalog-page-images', populateCatalog);            
+        $(document).ready(function () {
+            $.getJSON('/data/catalog-page-images', populateCatalog);
         });
 
         function populateCatalog(imageItems) {
@@ -22,28 +22,26 @@
             initPhotoSwipeFromDOM('.catalog-gallery');
         }
 
-        var itemTemplate= 
-        "<figure itemprop=\"associatedMedia\" itemscope itemtype=\"http://schema.org/ImageObject\">"+
-          "<a href=\"{image-url}\" itemprop=\"contentUrl\" data-size=\"{width}x{height}\">"+
+        var itemTemplate =
+        "<figure itemprop=\"associatedMedia\" itemscope itemtype=\"http://schema.org/ImageObject\">" +
+          "<a href=\"{image-url}\" itemprop=\"contentUrl\" data-size=\"{width}x{height}\">" +
               "<img src=\"/images/catalog?url={image-url}&width=320\" itemprop=\"thumbnail\" alt=\"{title}\" />" +
-          "</a>"+
-          "<figcaption itemprop=\"caption description\">{title}</figcaption>"+
+          "</a>" +
+          "<figcaption itemprop=\"caption description\">{title}</figcaption>" +
         "</figure>";
 
-        function replaceAll(str, search, replacement)
-        {
+        function replaceAll(str, search, replacement) {
             return str.split(search).join(replacement);
         }
 
         function generateItem(itemInfo) {
             var itemHtml = new String(itemTemplate);
             itemHtml = replaceAll(itemHtml, "{width}", itemInfo.Width);
-            
+
             itemHtml = replaceAll(itemHtml, "{height}", itemInfo.Height);
             itemHtml = replaceAll(itemHtml, "{image-url}", itemInfo.Url);
 
-            if(itemInfo.Title !== null)
-            {
+            if (itemInfo.Title !== null) {
                 itemHtml = replaceAll(itemHtml, "{title}", itemInfo.Title);
             }
             else {
@@ -55,7 +53,7 @@
 
         var initPhotoSwipeFromDOM = function (gallerySelector) {
 
-            // parse slide data (url, title, size ...) from DOM elements 
+            // parse slide data (url, title, size ...) from DOM elements
             // (children of gallerySelector)
             var parseThumbnailElements = function (el) {
                 var thumbElements = el.childNodes,
@@ -70,7 +68,7 @@
 
                     figureEl = thumbElements[i]; // <figure> element
 
-                    // include only element nodes 
+                    // include only element nodes
                     if (figureEl.nodeType !== 1) {
                         continue;
                     }
@@ -239,8 +237,10 @@
 
     </script>
 }
-<div class="catalog-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-</div>
+
+@section body{
+    <div class="catalog-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    </div>
 
     <!-- Root element of PhotoSwipe. Must have class pswp. -->
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -306,3 +306,8 @@
         </div>
 
     </div>
+}
+
+@section footer{
+    <p>Powered by <a href="http://photoswipe.com/">Photoswipe</a> gallery - <a href="http://twitter.com/dimsemenov">@@dimsemenov</a></p>
+}
