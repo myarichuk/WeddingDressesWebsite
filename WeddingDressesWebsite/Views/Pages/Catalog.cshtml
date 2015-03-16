@@ -3,19 +3,95 @@
 }
 
 @section header{
-    @Scripts.Render("~/bundles/gallery/scripts")
-    @Styles.Render("~/bundles/gallery/css")
     <noscript>@Styles.Render("~/bundles/gallery/css-no-javascript")</noscript>
     <!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
 }
 
 @section scripts{
+@Scripts.Render("~/bundles/gallery/scripts")
+
     <script type="text/javascript">
-        $(document).ready(function () {
-        })
+        var itemDescriptionTemplate = "data-description=\"<h3>{title}</h3>\"";
+        var itemTemplate = "<li>" +
+							    "<div data-alt=\"{alt-text}\"  data-max-width=\"{width}\" {data-description} data-max-height=\"{height}\">" +
+							    "<div data-src=\"/images/catalog?url={image-url}&width=1300\" data-min-width=\"1300\"></div>" +
+							    "<div data-src=\"/images/catalog?url={image-url}&width=1000\" data-min-width=\"1000\"></div>" +
+                                "<div data-src=\"/images/catalog?url={image-url}&width=700\" data-min-width=\"700\"></div>" +
+								"<div data-src=\"/images/catalog?url={image-url}&width=300\" data-min-width=\"300\"></div>" +
+								"<div data-src=\"/images/catalog?url={image-url}&width=200\" data-min-width=\"200\"></div>" +
+								"<div data-src=\"/images/catalog?url={image-url}&width=140\" data-min-width=\"140\"></div>" +
+                                "<div data-src=\"/images/catalog?url={image-url}&width=50\"></div>" +
+    							    "<noscript>" +
+									    "<img src=\"{image-url}\" alt=\"{alt-text}\"/>" +
+								    "</noscript>" +
+							    "</div>" +
+						    "</li>";            
+       
+        $(function () {
+
+            var GammaSettings = {
+                // order is important!
+                viewport: [{
+                    width: 1200,
+                    columns: 5
+                }, {
+                    width: 900,
+                    columns: 4
+                }, {
+                    width: 500,
+                    columns: 3
+                }, {
+                    width: 320,
+                    columns: 2
+                }, {
+                    width: 0,
+                    columns: 2
+                }]
+            };
+            $.getJSON('/data/catalog-page-images', function (imagesData) {
+                populateCatalog(imagesData);
+                Gamma.init(GammaSettings);
+            });
+
+        });
+
+        function populateCatalog(imagesData) {
+            var parent = $('.gamma-gallery');
+            $.each(imagesData, function (i, imageInfo) {
+                parent.append(generateItem(imageInfo));
+            });            
+        }
+
+        function replaceAll(str, search, replacement)
+        {
+            return str.split(search).join(replacement);
+        }
+
+        function generateItem(itemInfo) {
+            var itemHtml = new String(itemTemplate);
+            itemHtml = replaceAll(itemHtml,"{alt-text}", itemInfo.Title);
+            itemHtml = replaceAll(itemHtml, "{width}", itemInfo.Width);
+            itemHtml = replaceAll(itemHtml, "{min-width}", (itemInfo.Width / 2));
+            
+            itemHtml = replaceAll(itemHtml, "{height}", itemInfo.Height);
+            itemHtml = replaceAll(itemHtml, "{image-url}", itemInfo.Url);
+
+            if(itemInfo.Title !== null)
+            {
+                var dataDescriptionHtml = itemDescriptionTemplate;
+                itemHtml = replaceAll(itemHtml, "{data-description}", replaceAll(dataDescriptionHtml, "{title}", itemInfo.Title))
+            }
+            else {
+                itemHtml = replaceAll(itemHtml, "{data-description}", "");
+            }
+
+            return itemHtml;
+        }
     </script>
 }
 
-<div class="gamma-container gamma-loading" id="gamma-container">
-    <ul class="gamma-gallery"></ul>
+<div style="position:absolute; left:5px; top:100px;width:80%;height:80%" class="gamma-container gamma-loading" id="gamma-container">
+    <ul class="gamma-gallery">
+      
+    </ul>
 </div>

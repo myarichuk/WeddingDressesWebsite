@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageProcessor">
+      <HintPath>..\packages\ImageProcessor.2.2.0.0\lib\net45\ImageProcessor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -148,6 +151,7 @@
     <Content Include="Content\Images\Main\image3.jpg" />
     <Content Include="Content\Images\loader_dark.gif" />
     <Content Include="Content\Images\loader_light.gif" />
+    <Content Include="Content\knockout.pager.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\entypo-selected.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -185,6 +189,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquerypp.custom.js" />
     <Content Include="Scripts\js-url.min.js" />
+    <Content Include="Scripts\knockout-3.3.0.debug.js" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
+    <Content Include="Scripts\knockout.pager.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr.custom.70736.js" />
