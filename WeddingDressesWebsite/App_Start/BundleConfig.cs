@@ -20,12 +20,8 @@ namespace WeddingDressesWebsite
 						"~/Scripts/modernizr-*"));
 
 			bundles.Add(new ScriptBundle("~/bundles/gallery/scripts").Include(
-			"~/Scripts/modernizr.custom.70736.js",
-			"~/Scripts/jquery.masonry.min.js",
-			"~/Scripts/jquery.history.js",
-			"~/Scripts/js-url.min.js",
-			"~/Scripts/jquerypp.custom.js",
-			"~/Scripts/gamma.js"));
+			"~/Scripts/photoswipe.min.js",
+			"~/Scripts/photoswipe-ui-default.min.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
 					  "~/Scripts/bootstrap.js",
@@ -37,9 +33,9 @@ namespace WeddingDressesWebsite
 					  "~/Content/css/bootstrap.customize.css"));
 
 			bundles.Add(new StyleBundle("~/bundles/gallery/css").Include(
-					  "~/Content/css/style.css"));
+					  "~/Content/css/photoswipe.css",
+					  "~/Content/css/default-skin/default-skin.css"));
 
-			bundles.Add(new StyleBundle("~/bundles/gallery/css-no-javascript").Include("~/Content/css/noJS.css"));
         }
 	}
 }

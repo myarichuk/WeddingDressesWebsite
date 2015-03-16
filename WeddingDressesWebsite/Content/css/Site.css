@@ -110,3 +110,25 @@ footer {
 	max-width: 40%;
 	max-height: 40%;
 }
+
+.catalog-gallery {
+  position:fixed;
+  right:10px;
+  margin-top:70px;
+  width: 90%;
+  max-width:95%;
+  float: right;
+}
+.catalog-gallery img {
+  width: 100%;
+  height: auto;
+}
+.catalog-gallery figure {
+  display: block;
+  float: right;
+  margin: 0 5px 5px 0;
+  width: 150px;
+}
+.catalog-gallery figcaption {
+  display: none;
+}
