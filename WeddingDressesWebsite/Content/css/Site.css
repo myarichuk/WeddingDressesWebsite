@@ -17,6 +17,8 @@
 	margin-right:0px;
 }
 
+
+
 .header-icon-container{
 	padding:5px;
 	color: #fff;
@@ -130,4 +132,11 @@ footer {
 }
 .catalog-gallery figcaption {
   display: none;
+}
+
+article{
+	font-size:18px;
+	color: #fff;
+	font-weight:200;
+	text-shadow:0px 0px 2px #333;
 }
