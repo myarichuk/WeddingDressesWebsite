@@ -134,9 +134,9 @@ footer {
   display: none;
 }
 
-article{
+article, address{
 	font-size:18px;
 	color: #fff;
 	font-weight:200;
-	text-shadow:0px 0px 2px #333;
+	text-shadow:0 0 2px #333;
 }

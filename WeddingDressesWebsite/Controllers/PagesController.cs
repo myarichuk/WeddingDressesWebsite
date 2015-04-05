@@ -36,6 +36,11 @@ namespace WeddingDressesWebsite.Controllers
 				throw new ApplicationException("No phone configured, please check your config.");
 
 			ViewBag.Phone = ConfigurationManager.AppSettings["Phone"];
+
+			if (ConfigurationManager.AppSettings.AllKeys.Contains("Address") == false)
+				throw new ApplicationException("No address configured, please check your config.");
+
+			ViewBag.Address = ConfigurationManager.AppSettings["Address"];
 		}
 		public ActionResult Index()
 		{
@@ -52,10 +57,5 @@ namespace WeddingDressesWebsite.Controllers
 		{
 			return View();
 		}
-
-		public ActionResult Contact()
-		{
-			return View();
-		}		
 	}
 }
